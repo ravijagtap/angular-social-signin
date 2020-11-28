@@ -1,3 +1,4 @@
 # compiled output
 /AuthEntryService/bin
 /AuthEntryService/build
+/AuthEntryService/.gradle
