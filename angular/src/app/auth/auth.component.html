@@ -1,0 +1,53 @@
+<mat-card class="example-card" layout="row" layout-align="center center">  
+    <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title><span class="signinlink" (click)="panel = 'signin'">Sign In</span></mat-card-title>    
+  </mat-card-header>
+
+    <mat-card-content *ngIf="panel === 'signin'">
+        <mat-card class="example-card mat-card" layout="row" layout-align="center center" >  
+            <mat-card-content class="mat-card-half" >  
+                    <h2>Welcome  </h2>
+                    <br>
+                <div class="signin_div">
+                        <div class="btn-google-signin"  (click)="socialSignIn('google')">
+                            <span class="icon"></span>
+                            <span class="buttonText"></span>
+                        </div>
+                            <br>
+                        <div class="btn-facebook-signin"  (click)="socialSignIn('facebook')">
+                            <span class="icon"></span>
+                            <span class="buttonText"></span>
+                        </div>
+                        <br>
+                        <h5>No Account? <span class="createAccount" (click)="panel = 'signup'">Create One</span></h5>
+                </div>
+            </mat-card-content>  
+        </mat-card>
+    </mat-card-content>
+
+    <mat-card-content *ngIf="panel === 'signup'">
+        <mat-card class="example-card mat-card" layout="row" layout-align="center center" >  
+            <mat-card-content class="mat-card-half" >  
+                    <h2>Sign-Up</h2>
+                    <br>
+                <div class="signin_div">
+                        <div class="btn-google-signup"  (click)="socialSignUp('google')">
+                            <span class="icon"></span>
+                            <span class="buttonText"></span>
+                        </div>
+                            <br>
+                        <div class="btn-facebook-signup"  (click)="socialSignUp('facebook')">
+                            <span class="icon"></span>
+                            <span class="buttonText"></span>
+                        </div>
+                </div>
+            </mat-card-content>  
+        </mat-card>
+    </mat-card-content>
+
+    
+
+
+</mat-card>
+<br><br>

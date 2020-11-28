@@ -1,0 +1,53 @@
+.btn-google-signin {
+	background: url('/assets/btn_google_signin_dark_normal_web.png') transparent 5px 50%
+  no-repeat;
+	height: 42px;
+	width: 195px;
+    cursor: pointer;
+}
+
+.btn-facebook-signin {
+  background: url('/assets/btn_facebook_signin_web.png') transparent 5px 50%
+  no-repeat;
+	height: 42px;
+	width: 195px;
+    cursor: pointer;
+}
+
+.btn-google-signup {
+	background: url('/assets/google-sign-up.png') transparent 5px 50%
+  no-repeat;
+	height: 42px;
+	width: 195px;
+    cursor: pointer;
+}
+
+.btn-facebook-signup {
+  background: url('/assets/facebook-sign-up.png') transparent 5px 50%
+  no-repeat;
+	height: 42px;
+	width: 195px;
+    cursor: pointer;
+}
+
+.signin_div {
+    width: 50%;
+}
+
+.mat-card {
+    text-align: -webkit-center;
+}
+
+.mat-card-half {
+    width: 50%;
+}
+
+.signinlink {
+    cursor: pointer;
+}
+
+.createAccount {
+    cursor: pointer;
+    color: blue;
+}
+

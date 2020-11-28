@@ -1,0 +1,21 @@
+<mat-card class="example-card" layout="row" layout-align="center center">  
+    <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title><h5><span class="createAccount" (click)="logout()">Logout</span></h5></mat-card-title>    
+  </mat-card-header>
+
+    
+        <mat-card class="example-card mat-card" layout="row" layout-align="center center" >  
+            <mat-card-header>User Details</mat-card-header>
+            <mat-card-content >  
+                <table>
+                   <tr><td>First Name: </td><td>{{this.model.payload.firstName}}</td></tr>
+                   <tr><td>Last Name: </td><td>{{this.model.payload.lastName}} </td></tr>
+                   <tr><td>Email: </td><td>{{this.model.payload.email}}</td></tr>
+                   <tr><td>Account Created On: </td><td>{{this.model.payload.createdDate}}</td></tr>
+                </table>
+            </mat-card-content>  
+        </mat-card>    
+  </mat-card>
+
+<br><br>

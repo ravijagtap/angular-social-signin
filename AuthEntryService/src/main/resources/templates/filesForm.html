@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<div th:if="${message}">
+		<h2 th:text="${message}"/>
+	</div>
+	<div th:if="${error}">
+		    <h1>Errors</h1>
+		    <ul>
+		       <li th:each="item : *{error}" th:text="${item}"  >Item description here...</li>
+    		</ul>
+
+	</div>
+
+	<div>
+		<form method="POST" enctype="multipart/form-data" action="/filemanager/">
+			<table>
+				<tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
+				<tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+			</table>
+		</form>
+	</div>
+
+	<div>
+		<table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                   
+                    <tr th:each="file : ${files}">
+	                    <form method="POST"  action="/contentfeeder/">
+	                      <td> <a th:href="${file}" th:text="${file}" > </a> </td>
+	                      <input type ="hidden" name="filename" th:value = "${file}"/>
+	                      <input type ="hidden" name="subjectId" th:value ="${subjectId}"/>
+	                      <td><input type="submit" value="Process" /></td>
+	                    </form> 
+                    </tr>   
+                </tbody>
+		</table>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,22 @@
+<h1>Student</h1><a (click)="refresh()">Refresh</a>
+<div [hidden]="!authenticated()">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Student Id</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr *ngFor="let student of students; let i = index">
+		    <td>{{student.id}}</td>
+		    <td>{{student.firstName}}</td>
+		    <td>{{student.lastName}}</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+<div [hidden]="authenticated()">
+	<p><a href='/login'>Login</a> to see list of student</p>
+</div>
