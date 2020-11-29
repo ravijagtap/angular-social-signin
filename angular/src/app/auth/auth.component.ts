@@ -46,7 +46,7 @@ export class AuthComponent {
         if(this.model.errors) {
           alert(this.model.errors.details + ", please Sign-Up");
         } else {
-          this.tokenService.storeToken(userData.idToken, userData.email, userData.provider);
+          this.tokenService.storeToken(userData);
           this.navigate();
         }
         
@@ -82,7 +82,7 @@ export class AuthComponent {
         if(this.model.errors) {
           alert(this.model.errors.details + ", please Sign-In");
         } else {
-          this.tokenService.storeToken(userData.idToken, userData.email, userData.provider);
+          this.tokenService.storeToken(userData);
           this.navigate();
         }
       },

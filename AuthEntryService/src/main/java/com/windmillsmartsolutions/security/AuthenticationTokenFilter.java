@@ -30,6 +30,9 @@ public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFil
 	private GoogleTokenUtil googleTokenUtils;
 
 	@Autowired
+	private FacebookTokenUtil facebookTokenUtils;
+
+	@Autowired
 	private SecurityUserDetailServiceImpl authenticationService;
 
 	@Override
@@ -52,28 +55,31 @@ public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFil
 		String authToken = httpReq.getHeader(AuthEntryConstant.TOKEN_HEADER);
 		String provider = httpReq.getHeader(AuthEntryConstant.PROVIDER);
 
-		if ("GOOGLE".equalsIgnoreCase(provider)) {
-			String email = null;
-			try {
-				email = this.googleTokenUtils.validateTokenAndReturnEmail(authToken);
-			} catch (GeneralSecurityException e) {
-				e.printStackTrace();
+		String email = null;
+		try {
+			if ("GOOGLE".equalsIgnoreCase(provider)) {
+				email = this.googleTokenUtils.validateTokenAndReturnEmail(authToken);			
+			} else {
+				email = this.facebookTokenUtils.validateTokenAndReturnEmail(authToken);
 			}
-			if(email != null) {
-				//Get user from token and validate with database 
-				try {
-					UserDetails userDetails = this.authenticationService.loadUserByUsername(email);				
-					if(userDetails != null) {
-						UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-						authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpReq));
-						SecurityContextHolder.getContext().setAuthentication(authentication);
-					}
-				} catch(UsernameNotFoundException e) {
-
-				}
-			}
-			
+		} catch (GeneralSecurityException e) {
+			e.printStackTrace();
 		}
+
+		if(email != null) {
+			//Get user from token and validate with database 
+			try {
+				UserDetails userDetails = this.authenticationService.loadUserByUsername(email);				
+				if(userDetails != null) {
+					UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+					authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpReq));
+					SecurityContextHolder.getContext().setAuthentication(authentication);
+				}
+			} catch(UsernameNotFoundException e) {
+			}
+		}
+			
+		
 		chain.doFilter(req, res);
 	}
 }

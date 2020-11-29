@@ -67,6 +67,12 @@ import { UserComponent } from './user/user.component';
             provider: new GoogleLoginProvider(
               GOOGLE_CLIENT_ID
             )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider(
+              FACEBOOK_CLIENT_ID
+            )
           }
         ]
       } as SocialAuthServiceConfig,

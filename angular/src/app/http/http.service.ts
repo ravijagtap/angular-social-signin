@@ -19,13 +19,7 @@ export class HttpService {
     }
 
     getHeader(): HttpHeaders {
-        let headers = new HttpHeaders();
-        /*if(this.tokenStorage.get().getValue().startsWith("{")) {
-            headers = headers.append(TOKEN_NAME, JSON.parse(this.tokenStorage.get().getValue()).access_token);            
-            headers = headers.append(PROVIDER, "google");
-        } else {
-            headers = headers.append(TOKEN_NAME, this.tokenStorage.get().getValue());        
-        } */               
+        let headers = new HttpHeaders();                     
         headers = headers.append(this.PROVIDER, localStorage.getItem("provider"));
         headers = headers.append(this.TOKEN_NAME, localStorage.getItem("token"));        
         return headers;
@@ -53,7 +47,11 @@ export class HttpService {
 
     executeCorePostRequest(url, body) {
         let headers = new HttpHeaders();
-        headers = headers.append(this.TOKEN_NAME, body.idToken);            
+        if("FACEBOOK" == body.provider) {
+            headers = headers.append(this.TOKEN_NAME, body.authToken);            
+        } else {
+            headers = headers.append(this.TOKEN_NAME, body.idToken);            
+        }
         headers = headers.append(this.PROVIDER, body.provider);
         return this.http.post(this.API_URL + url, body, { headers }).pipe (
             map((res: Response) => res),

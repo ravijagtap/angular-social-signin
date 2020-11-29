@@ -5,10 +5,14 @@ import { Injectable } from '@angular/core';
 export class TokenService {
 
 
-    storeToken(token, email, provider) { 
-        localStorage.setItem("token", token);
-        localStorage.setItem("email", email);
-        localStorage.setItem("provider", provider);
+    storeToken(userData) { 
+        if("FACEBOOK" === userData.provider) {
+            localStorage.setItem("token", userData.authToken);
+        } else {
+            localStorage.setItem("token", userData.idToken);
+        }
+        localStorage.setItem("email", userData.email);
+        localStorage.setItem("provider", userData.provider);
     }
 
     clearStorage() {

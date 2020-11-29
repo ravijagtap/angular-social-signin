@@ -9,6 +9,7 @@ import com.windmillsmartsolutions.dto.UserDTO;
 import com.windmillsmartsolutions.exception.EntityType;
 import com.windmillsmartsolutions.exception.ExceptionType;
 import com.windmillsmartsolutions.exception.UserException;
+import com.windmillsmartsolutions.security.FacebookTokenUtil;
 import com.windmillsmartsolutions.security.GoogleTokenUtil;
 import com.windmillsmartsolutions.service.UserService;
 
@@ -30,6 +31,9 @@ public class SocialAuthenticationController {
     GoogleTokenUtil googleToken;
 
     @Autowired
+    FacebookTokenUtil facebookTokenUtil;
+
+    @Autowired
     UserService userService;
 
     @Autowired
@@ -45,7 +49,12 @@ public class SocialAuthenticationController {
     @PostMapping(value = "/v1/validateTokenAndGetUserDetails")
     public Response validateTokenAndGetUserDetails(@RequestBody Map tokenMap) {
         try {
-            String email = googleToken.validateTokenAndReturnEmail((String)tokenMap.get("idToken"));
+            String email = null;
+            if("FACEBOOK".equalsIgnoreCase((String)tokenMap.get("provider"))) {
+                email = facebookTokenUtil.validateTokenAndReturnEmail((String)tokenMap.get("authToken"));
+            } else {
+                email = googleToken.validateTokenAndReturnEmail((String)tokenMap.get("idToken"));
+            }
             if (email != null) {
                 UserDTO userDTO = userService.findUserByEmail((String)tokenMap.get("email"));
                 if (userDTO != null) {
@@ -79,7 +88,13 @@ public class SocialAuthenticationController {
     @PostMapping(value = "/v1/validateTokenAndSignUp")
     public Response validateTokenAndSignUp(@RequestBody Map tokenMap) {
         try {
-            String email = googleToken.validateTokenAndReturnEmail((String)tokenMap.get("idToken"));
+            String email = null;
+            if("FACEBOOK".equalsIgnoreCase((String)tokenMap.get("provider"))) {
+                email = facebookTokenUtil.validateTokenAndReturnEmail((String)tokenMap.get("authToken"));
+            } else {
+                email = googleToken.validateTokenAndReturnEmail((String)tokenMap.get("idToken"));
+            }
+
             if (email != null) {
                 UserDTO userDTO = userService.findUserByEmail((String)tokenMap.get("email"));
                 if (userDTO == null) {
