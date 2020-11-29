@@ -4,9 +4,11 @@ import com.windmillsmartsolutions.dao.User;
 import com.windmillsmartsolutions.dto.UserDTO;
 
 /**
- * The class is to convert DTO to entity and vice-versa for the User entity.
- *  
- */
+* The class is to convert DTO to entity and vice-versa for the User entity.
+*
+* @author  Ravi Jagtap
+* @version 1.0
+*/
 public class UserAssembler {
 	
 	/**

@@ -10,7 +10,6 @@ import com.windmillsmartsolutions.exception.EntityType;
 import com.windmillsmartsolutions.exception.ExceptionType;
 import com.windmillsmartsolutions.exception.UserException;
 import com.windmillsmartsolutions.security.GoogleTokenUtil;
-import com.windmillsmartsolutions.security.SecurityUserDetailServiceImpl;
 import com.windmillsmartsolutions.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+* Controller class to hanle all requests related to Social Sign-in and Token Verification
+*
+* @author  Ravi Jagtap
+* @version 1.0
+*/
 @RestController
 public class SocialAuthenticationController {
 
@@ -30,8 +35,13 @@ public class SocialAuthenticationController {
     @Autowired
     UserException userException;
     
-
-
+    /**
+	 * This method is called during the sign-in process. This validates the token prvided by google or facebook and fetch the user details.
+     * If Token is not valid then UNAUTHORIZED_ACCESS will be returned as response 
+     * If user is not registered in the application, then ENTITY_NOT_FOUND will be returned as response. 
+	 * @param tokenMap
+	 * @return Response
+	 */
     @PostMapping(value = "/v1/validateTokenAndGetUserDetails")
     public Response validateTokenAndGetUserDetails(@RequestBody Map tokenMap) {
         try {
@@ -58,7 +68,14 @@ public class SocialAuthenticationController {
         }
         return Response.unauthorized(userException.exception(EntityType.USER, ExceptionType.UNAUTHORIZED_ACCESS, ""));
     }
-    
+
+    /**
+	 * This is called during the sign-up process. This validates the token prvided by google or facebook and fetch the user details.
+     * If Token is not valid then UNAUTHORIZED_ACCESS will be returned as response 
+     * If user is already registered in the application, then DUPLICATE_ENTITY will be returned as response. 
+	 * @param tokenMap
+	 * @return Response
+	 */    
     @PostMapping(value = "/v1/validateTokenAndSignUp")
     public Response validateTokenAndSignUp(@RequestBody Map tokenMap) {
         try {
