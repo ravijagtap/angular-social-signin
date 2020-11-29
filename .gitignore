@@ -2,3 +2,6 @@
 /AuthEntryService/bin
 /AuthEntryService/build
 /AuthEntryService/.gradle
+/StringOperations/bin
+/StringOperations/build
+/StringOperations/.gradle
