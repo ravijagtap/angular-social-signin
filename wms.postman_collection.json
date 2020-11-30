@@ -1,0 +1,51 @@
+{
+	"variables": [],
+	"info": {
+		"name": "wms",
+		"_postman_id": "d4bb9f88-8547-3de5-9a94-61d81991e96b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/maxString",
+			"request": {
+				"url": "http://localhost:8080/maxString",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"data\": [\"A\", \"BB\", \"D\", \"FF\", \"asd\"]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/deleteString",
+			"request": {
+				"url": "http://localhost:8080/deleteString",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"data\": [\"A\", \"BB\", \"Daaaaaaaaaaaaaaaaaaaa\", \"FF\", \"asd\", \"asdadassssssssssss\"]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

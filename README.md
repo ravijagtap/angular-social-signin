@@ -13,4 +13,6 @@
 
 <i>Read StringOperations/README.md file for more details</i>
 
+`wms.postman_collection.json` Postman collection to test the APIs
+
 ***
